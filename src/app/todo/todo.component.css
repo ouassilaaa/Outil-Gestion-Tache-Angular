@@ -1,0 +1,16 @@
+.card{
+    width: 85%;
+    margin: auto; 
+    top: 2em;
+    padding: 0;
+    
+}
+
+.form{
+    width: 100%;
+    padding: 0.4em;
+}
+.col-md-3{
+    background:#303030;
+    height:95vh; 
+}
