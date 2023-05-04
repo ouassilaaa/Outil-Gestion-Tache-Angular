@@ -14,7 +14,7 @@ import { ITask } from '../model/task';
 export class TodoComponent implements OnInit{
 
   todoForm !: FormGroup;
-  tasks: ITask []=[]; 
+  tasks : ITask []=[]; 
   inprogess : ITask []=[]; 
   done : ITask []= [];
 
@@ -24,6 +24,23 @@ export class TodoComponent implements OnInit{
     this.todoForm = this.fb.group({
       item: ['', Validators.required]
     })
+  }
+
+  addTask(){
+    this.tasks.push({
+      description:this.todoForm.value.item,
+      done:false
+    })
+  }
+
+  deleteTask(i:number){
+    this.tasks.splice(i,1)
+  }
+  deleteInProgress(i:number){
+    this.inprogess.splice(i,1)
+  }
+  deleteDone(i:number){
+    this.done.splice(i,1)
   }
 
   drop(event: CdkDragDrop<ITask[]>) {

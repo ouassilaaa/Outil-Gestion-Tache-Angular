@@ -6,51 +6,79 @@
                     <form [formGroup]="todoForm">
                         <mat-form-field appearance="outline" style="width: 100%; padding-inline: 2%">
                             <mat-label>Votre tâche</mat-label>
-                            <input  matInput placeholder="Ex : Allez au sport">
+                            <input formControlName="item"  matInput placeholder="Ex : Allez au sport">
                             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                             <mat-hint></mat-hint>
                         </mat-form-field>
-                        <button mat-raised-button disabled="todoForm.invalide" color="primary"> Ajouter </button>
+                        <button (click)="addTask()" mat-raised-button [disabled]="todoForm.invalid" color="primary" > Ajouter </button>
 
                     </form>
                 </mat-card>    
             </div>
         </div>  
-            
-    <div class="col-md-9" >
+    </div>
+
+        <div class="col-md-9" >
             <div cdkDropListGroupe >
                 <div class="row">
                     <div class="col-md-4">
                         <!-- todo -->
                         <div class="example-container">
-                            <h2>To do</h2>
+                            <h2>A FAIRE</h2>
+                        
+                            <div cdkDropList [cdkDropListData]="inprogess" class="example-list" (cdkDropListDropped)="drop($event)">
+                              <div class="example-box" *ngFor="let item of tasks; let i=index" cdkDrag> {{item.description}} 
+                                <div class="box">
+                                    <button mat-icon-button color="warn" (click)="deleteTask(i)"><mat-icon> delete</mat-icon> </button>
+                                    <button mat-icon-button color="primary" (click)="deleteTask(i)"> <mat-icon> edit</mat-icon> </button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>  
+                                      
+                    <div class="col-md-4">
+                        <!-- inprgress -->
+                        <div class="example-container">
+                            <h2>EN COURS</h2>
                         
                             <div
                               cdkDropList
-                              [cdkDropListData]="tasks"
+                              [cdkDropListData]="inprogess"
                               class="example-list"
                               (cdkDropListDropped)="drop($event)">
-                              <div class="example-box" *ngFor="let item of tasks" cdkDrag>{{item}}</div>
+                              <div class="example-box" *ngFor="let item of inprogess, let i= index" cdkDrag>{{item.description}}
+                                <button mat-icon-button color="warn" (click)="deleteInProgress(i)"><mat-icon> delete</mat-icon> </button>
+                              </div>
                             </div>
                           </div>
-
-                    <div class="col-md-4">
-                        <!-- inprgress -->
-                    <h2>In Progress</h2>
                     </div>
 
                     <div class="col-md-4">
                         <!-- done -->
-                    <h2>Done</h2>
-                    </div>
-                    
-                     
-                </div>
+                        <div class="example-container">
+                            <h2>FINI</h2>
+                        
+                            <div
+                              cdkDropList
+                              [cdkDropListData]="done"
+                              class="example-list"
+                              (cdkDropListDropped)="drop($event)">
+                              <div class="example-box" *ngFor="let item of done,let i= index" cdkDrag>{{item.description}}
+                                <button mat-icon-button color="warn" (click)="deleteDone(i)"><mat-icon> delete</mat-icon> </button>
 
+                              </div>
+                        </div>
+                    </div>
+                </div>                          
             </div>
+        </div>
     </div>
+</div>
+
+
     
-</div>   
+
 
 
 

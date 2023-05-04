@@ -1,3 +1,4 @@
+
 .card{
     width: 95%;
     margin: auto; 
@@ -75,5 +76,11 @@
   
   .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .box{
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 10px;
   }
   
